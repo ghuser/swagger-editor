@@ -48,6 +48,13 @@
   <script src="./dist/swagger-editor-bundle.js"> </script>
   <script src="./dist/swagger-editor-standalone-preset.js"> </script>
   <script>
+  //read get param.
+  var url = 
+  (function(name){
+    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
+  })("url");
+  
   window.onload = function() {
     // Build a system
     const editor = SwaggerEditorBundle({
@@ -55,7 +62,8 @@
       layout: 'StandaloneLayout',
       presets: [
         SwaggerEditorStandalonePreset
-      ]
+      ],
+      url: url
     })
 
     window.editor = editor
